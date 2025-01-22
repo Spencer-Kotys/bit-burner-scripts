@@ -3,11 +3,10 @@ import { NS } from "@ns";
 export async function main(ns: NS): Promise<void> {
     // run TOR script (need better tech for this, must be manual for now)
     //ns.exec("buystuff.js", "home");
-    // run search and root script
-    ns.exec("getServers.js","home");
-    // copy payload to servers
-    let internet = ns.exec("copyPayload.ts","home");
+    // run search, root, and copy script
+    ns.run("getServers.js");
     // attack (while loop w/ search)
+    ns.run("moneyMaker.js");
 
     // buy servers (while loop)
 
