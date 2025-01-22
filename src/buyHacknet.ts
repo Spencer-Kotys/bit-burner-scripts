@@ -2,32 +2,43 @@ import { NS } from "@ns";
 
 export async function main(ns: NS): Promise<void> {
     while (ns.hacknet.numNodes() < ns.hacknet.maxNumNodes()) {
+        // limit node cost ot 500k
         const limit = 500000;
+        // get money available on home server
         const money = ns.getServerMoneyAvailable("home");
+        // get cost of new node
         const nodeCost = ns.hacknet.getPurchaseNodeCost();
+        // if we have enough money to buy a new node and the cost is less than the limit
         if (money > nodeCost && nodeCost < limit) {
-          ns.hacknet.purchaseNode();
-          ns.tprint("Purchased new node!");
+            // purchase a new node
+            ns.hacknet.purchaseNode();
         }
+        // otherwise, upgrade existing nodes
         else {
-          for (let i = 0; i < ns.hacknet.numNodes(); ++i) {
-            const levelCost = ns.hacknet.getLevelUpgradeCost(i);
-            const ramCost = ns.hacknet.getRamUpgradeCost(i)
-            const coreCost = ns.hacknet.getCoreUpgradeCost(i)
-            if (money > levelCost && levelCost < limit) {
-              ns.hacknet.upgradeLevel(i);
-              ns.tprint("Purchased new level on node ", i);
+            // loop through all nodes
+            for (let i = 0; i < ns.hacknet.numNodes(); ++i) {
+                // get cost of upgrading level, ram, and cores
+                const levelCost = ns.hacknet.getLevelUpgradeCost(i);
+                const ramCost = ns.hacknet.getRamUpgradeCost(i)
+                const coreCost = ns.hacknet.getCoreUpgradeCost(i)
+                // get lowest cost upgrade option
+                const minCost = Math.min(levelCost, ramCost, coreCost);
+                // if we have enough money to upgrade and the cost is less than the limit
+                if (money > minCost && minCost < limit) {
+                    // upgrade the node
+                    if (minCost === levelCost) {
+                        ns.hacknet.upgradeLevel(i);
+                    }
+                    else if (minCost === ramCost) {
+                        ns.hacknet.upgradeRam(i);
+                    }
+                    else if (minCost === coreCost) {
+                        ns.hacknet.upgradeCore(i);
+                    }
+                }
             }
-            else if (money > ramCost && ramCost < limit) {
-              ns.hacknet.upgradeRam(i);
-              ns.tprint("Purchased more ram on node ", i);
-            }
-            else if (money > coreCost && coreCost < limit) {
-              ns.hacknet.upgradeCore(i);
-              ns.tprint("Purchased more cores on node ", i);
-            }
-          }
         }
+        // sleep for 10 seconds
         await ns.sleep(10000);
-      }
+    }
 }
