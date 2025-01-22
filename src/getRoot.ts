@@ -142,5 +142,5 @@ export async function main(ns: NS): Promise<void> {
         ns.brutessh(port5[i]);
         ns.nuke(port5[i]);
     }
-    return
+    return;
 }
