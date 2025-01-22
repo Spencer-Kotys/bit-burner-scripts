@@ -7,11 +7,10 @@ export async function main(ns: NS): Promise<void> {
     ns.run("getServers.js");
     // attack (while loop w/ search)
     ns.run("moneyMaker.js");
-
     // buy servers (while loop)
-
+    ns.run("buyServers.js");
     // buy hacknet (while loop)
-
+    ns.run("buyHacknet.js");
     // progress through milestones
 
 }
