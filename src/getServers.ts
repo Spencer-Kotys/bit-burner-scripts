@@ -1,6 +1,6 @@
 import { NS } from "@ns";
 
-export async function main(ns: NS): Promise<void> {
+export async function main(ns: NS): Promise<string[]> {
   function search(server: string,internet: string[],ns: NS) {
     // make array of neighboring servers
     let network: string[] = ns.scan(server);
@@ -21,5 +21,5 @@ export async function main(ns: NS): Promise<void> {
   let internet: string[] = search("home",[],ns);
   // get root access on servers
   ns.exec("getRoot.js","home",1,...internet);
-  return;
+  return internet;
 }
