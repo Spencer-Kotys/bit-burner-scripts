@@ -3,6 +3,16 @@ import { NS } from "@ns";
 export async function main(ns: NS): Promise<void> {
     // declare internet as array of strings
     let internet: string[] = ns.args as string[];
+    // declare array for one port servers
+    let port1: string[] = [];
+    // declare array for two port servers
+    let port2: string[] = [];
+    // declare array for three port servers
+    let port3: string[] = [];
+    // declare array for four port servers
+    let port4: string[] = [];
+    // declare array for five port servers
+    let port5: string[] = [];
     // for each server on the internet
     for (let i = 0; i < internet.length; ++i) {
         // declare server as a string    
@@ -22,7 +32,8 @@ export async function main(ns: NS): Promise<void> {
                         ns.nuke(server);
                     }
                     else {
-                        ns.tprint(server + " requires " + ports + " to hack!");
+                        // add server to port1 list
+                        port1.push(server);
                     }
                     break;
                 case 2:
@@ -32,7 +43,8 @@ export async function main(ns: NS): Promise<void> {
                         ns.nuke(server);
                     }
                     else {
-                        ns.tprint(server + " requires " + ports + " to hack!");
+                        // add server to port1 list
+                        port2.push(server);
                     }
                     break;
                 case 3:
@@ -43,7 +55,8 @@ export async function main(ns: NS): Promise<void> {
                         ns.nuke(server);
                     }
                     else {
-                        ns.tprint(server + " requires " + ports + " to hack!");
+                        // add server to port1 list
+                        port3.push(server);
                     }
                     break;
                 case 4:
@@ -55,7 +68,8 @@ export async function main(ns: NS): Promise<void> {
                         ns.nuke(server);
                     }
                     else {
-                        ns.tprint(server + " requires " + ports + " to hack!");
+                        // add server to port1 list
+                        port4.push(server);
                     }
                     break;
                 case 5:
@@ -68,7 +82,8 @@ export async function main(ns: NS): Promise<void> {
                         ns.nuke(server);
                     }
                     else {
-                        ns.tprint(server + " requires " + ports + " to hack!");
+                        // add server to port1 list
+                        port5.push(server);
                     }
                     break;
                 default:
