@@ -5,10 +5,11 @@ export async function main(ns: NS): Promise<void> {
     let internet: string[] = ns.args as string[];
     // for each server on the internet
     for (let i = 0; i < internet.length; ++i) {
-      let server = internet[i];
+        // declare server as a string    
+        let server: string = internet[i];
       if (!(ns.hasRootAccess(server))) {
         // get number to ports required to hack
-        const ports = ns.getServerNumPortsRequired(server);
+        let ports: number = ns.getServerNumPortsRequired(server);
         // depending on the number of ports required do this
         switch (ports) {
         case 0:
