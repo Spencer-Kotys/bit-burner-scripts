@@ -91,12 +91,56 @@ export async function main(ns: NS): Promise<void> {
             }
         }
     }
-    // wait for "BrueSSH to exist"
+    // wait for "BruteSSH to exist
     while (!(ns.fileExists("BruteSSH.exe", "home"))) {
-        ns.sleep(10000)
+        ns.sleep(10000);
     }
+    // go through 1 port list
     for (let i = 0; i< port1.length; ++i) {
         ns.brutessh(port1[i]);
         ns.nuke(port1[i]);
     }
+    // wait for FTPcrack to exist
+    while (!(ns.fileExists("FTPcrack.exe", "home"))) {
+        ns.sleep(10000);
+    }
+    for (let i = 0; i < port2.length; ++i) {
+        ns.ftpcrack(port2[i]);
+        ns.brutessh(port2[i]);
+        ns.nuke(port2[i]);
+    }
+    // wait for RelaySMTP to exist
+    while (!(ns.fileExists("RelaySMTP.exe", "home"))) {
+        ns.sleep(10000);
+    }
+    for (let i = 0; i < port3.length; ++i) {
+        ns.relaysmtp(port3[i]);
+        ns.ftpcrack(port3[i]);
+        ns.brutessh(port3[i]);
+        ns.nuke(port3[i]);
+    }
+    // wait for HTTPWorm to exist
+    while (!(ns.fileExists("HTTPWorm.exe", "home"))) {
+        ns.sleep(10000);
+    }
+    for (let i = 0; i < port4.length; ++i) {
+        ns.httpworm(port4[i]);
+        ns.relaysmtp(port4[i]);
+        ns.ftpcrack(port4[i]);
+        ns.brutessh(port4[i]);
+        ns.nuke(port4[i]);
+    }
+    // wait for SQLInject to exist
+    while (!(ns.fileExists("SQLInject.exe", "home"))) {
+        ns.sleep(10000);
+    }
+    for (let i = 0; i < port5.length; ++i) {
+        ns.sqlinject(port5[i]);
+        ns.httpworm(port5[i]);
+        ns.relaysmtp(port5[i]);
+        ns.ftpcrack(port5[i]);
+        ns.brutessh(port5[i]);
+        ns.nuke(port5[i]);
+    }
+    return
 }
