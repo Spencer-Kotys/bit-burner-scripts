@@ -1,7 +1,8 @@
 import { NS } from "@ns";
 
 export async function main(ns: NS): Promise<void> {
-    const internet = ns.args;
+    // declare internet as array of strings
+    let internet: string[] = ns.args as string[];
     // for each server on the internet
     for (let i = 0; i < internet.length; ++i) {
       let server = internet[i];
