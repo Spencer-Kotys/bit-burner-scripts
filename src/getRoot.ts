@@ -91,4 +91,12 @@ export async function main(ns: NS): Promise<void> {
             }
         }
     }
+    // wait for "BrueSSH to exist"
+    while (!(ns.fileExists("BruteSSH.exe", "home"))) {
+        ns.sleep(10000)
+    }
+    for (let i = 0; i< port1.length; ++i) {
+        ns.brutessh(port1[i]);
+        ns.nuke(port1[i]);
+    }
 }
