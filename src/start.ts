@@ -12,5 +12,8 @@ export async function main(ns: NS): Promise<void> {
     // buy hacknet (while loop)
     ns.run("buyHacknet.js");
     // progress through milestones
-
+    ns.run("milestones.js");
+    // print done
+    ns.tprint("Start up completed!");
+    return
 }
