@@ -102,8 +102,7 @@ export async function main(ns: NS): Promise<void> {
                 }
             }
         }
+        // check if there are new servers
+        internet = checkInternet(ns, internet);
     }
-    // check if there are new servers
-    internet = checkInternet(ns, internet);
-    return;
  }
