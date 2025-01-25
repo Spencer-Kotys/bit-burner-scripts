@@ -67,22 +67,43 @@ export async function main(ns: NS): Promise<void> {
         let target: string = getTarget(ns, internet);
         // check if security level is above min security level
         if (ns.getServerSecurityLevel(target) > ns.getServerMinSecurityLevel(target)) {
-            // if security is greater than current level
-      if (ns.getServerSecurityLevel(target) > ns.getServerMinSecurityLevel(target)) {
-        // weaken it
-        for (let i = 0; i< internet.length; ++i) {
-          let server: string = internet[i];
-          // get number of threads to run
-          let numOfThreads: number = getNumOfThreads(ns, server, weakenRam);
-          // execute payload on server with number of threads
-          if (numOfThreads > 0) {
-            ns.exec("w.js",server,numOfThreads,target);
-          }
+            // weaken it
+            for (let i = 0; i< internet.length; ++i) {
+                let server: string = internet[i];
+                // get number of threads to run
+                let numOfThreads: number = getNumOfThreads(ns, server, weakenRam);
+                // execute payload on server with number of threads
+                if (numOfThreads > 0) {
+                    ns.exec("w.js",server,numOfThreads,target);
+                }
+            }
         }
-      }
+        else if (ns.getServerMoneyAvailable(target) < ns.getServerMaxMoney(target)) {
+            // grow it
+            for (let i = 0; i< internet.length; ++i) {
+                let server: string = internet[i];
+                // get number of threads to run
+                let numOfThreads: number = getNumOfThreads(ns, server, growRam);
+                // execute payload on server with number of threads
+                if (numOfThreads > 0) {
+                    ns.exec("g.js",server,numOfThreads,target);
+                }
+            }
         }
-        // check if there are new servers
-        internet = checkInternet(ns, internet);
+        else {
+            // hack it
+            for (let i = 0; i< internet.length; ++i) {
+                let server: string = internet[i];
+                // get number of threads to run
+                let numOfThreads: number = getNumOfThreads(ns, server, hackRam);
+                // execute payload on server with number of threads
+                if (numOfThreads > 0) {
+                    ns.exec("h.js",server,numOfThreads,target);
+                }
+            }
+        }
     }
+    // check if there are new servers
+    internet = checkInternet(ns, internet);
     return;
  }
