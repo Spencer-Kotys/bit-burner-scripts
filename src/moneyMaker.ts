@@ -36,12 +36,26 @@ function checkInternet(ns: NS, internet: string[]): string[] {
     return internet;
 }
 
+// calculate number of threads to run on server
+function numOfThreads(ns: NS, server: string, scriptRam: number) {
+    // get amount of RAM on server
+    const serverRam = ns.getServerMaxRam(server);
+    // get current RAM used
+    const usedRam = ns.getServerUsedRam(server);
+    // calculate number of threads to run based on Ram, round down to nearest whole number
+    const threads = Math.floor((serverRam - usedRam) / scriptRam);
+    // return number of threads
+    return threads;
+  }
+
 export async function main(ns: NS): Promise<void> {
     // declare internet as array of strings
     let internet: string[] = ns.args as string[];
     // run while loop
     while (true) {
+        // get best target based on highest percentage of money hacked per thread
         let target: string = getTarget(ns, internet);
+        // check if there are new servers
         internet = checkInternet(ns, internet);
     }
     return;
