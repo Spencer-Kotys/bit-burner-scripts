@@ -12,7 +12,7 @@ export async function main(ns: NS): Promise<void> {
     // run root script
     ns.run("getRoot.js", 1, ...internet);
     // run copy script
-    ns.run("copyScripts.js", 1, ...internet);
+    ns.run("copyPayload.js", 1, ...internet);
     // attack (while loop w/ search)
     ns.run("moneyMaker.js");
     // buy servers (while loop)
