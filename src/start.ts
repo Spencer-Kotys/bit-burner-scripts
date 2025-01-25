@@ -5,6 +5,10 @@ export async function main(ns: NS): Promise<void> {
     //ns.exec("buystuff.js", "home");
     // run search, root, and copy script
     ns.run("getServers.js");
+    // wait for port 1 to be written to
+    await ns.nextPortWrite(1);
+    // peek port 1
+    let internet: string[] = ns.peek(1);
     // attack (while loop w/ search)
     ns.run("moneyMaker.js");
     // buy servers (while loop)
