@@ -14,13 +14,11 @@ export async function main(ns: NS): Promise<void> {
     // run copy script
     ns.run("copyPayload.js", 1, ...internet);
     // attack (while loop w/ search)
-    ns.run("moneyMaker.js");
+    ns.run("moneyMaker.js", 1, ...internet);
     // buy servers (while loop)
     ns.run("buyServers.js");
     // buy hacknet (while loop)
     ns.run("buyHacknet.js");
-    // progress through milestones
-    ns.run("milestones.js");
     // print done
     ns.tprint("Start up completed!");
     return
