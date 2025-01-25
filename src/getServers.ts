@@ -17,15 +17,10 @@ export async function main(ns: NS): Promise<void> {
     // return value of internet
     return internet;
   }
-  // if no arguments are passed
-  if (ns.args.length === 0) {
-    // get array of all servers
-    let internet: string[] = search("home",[],ns);
-    // get root access on servers
-    ns.run("getRoot.js",1,...internet);
-    // copy payload to servers
-    ns.run("copyPayload.ts",1,...internet);
-    return
-  }
-  
+  // get array of all servers
+  let internet: string[] = search("home",[],ns);
+  // clear port 1
+  ns.clearPort(1);
+  // write array to port 1
+  ns.writePort(1,internet);
 }
