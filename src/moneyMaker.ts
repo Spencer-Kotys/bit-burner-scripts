@@ -3,7 +3,7 @@ import { NS } from "@ns";
 function getTarget(ns: NS, internet: string[]): string {
     // create base variables
     let targetName: string = "";
-    let highestPercentage: number = 0;
+    let highestScore: number = 0;
     // loop through internet array
     for (let i = 0; i < internet.length; ++i) {
         const server = internet[i];
@@ -13,10 +13,16 @@ function getTarget(ns: NS, internet: string[]): string {
             if (ns.getServerRequiredHackingLevel(server) <= ns.getHackingLevel()) {
                 // get percentage of money that is hacked with one thread
                 let percentage: number = ns.hackAnalyze(server);
-                // check if percentage of money hacked is the highest percentage yet
-                if (percentage > highestPercentage) {
-                    // set highest percentage and target name to new server
-                    highestPercentage = percentage;
+                // get max amount of money on server
+                let maxMoney: number = ns.getServerMaxMoney(server);
+                // get time to hack server
+                let hackTime: number = ns.getHackTime(server);
+                // calculate score
+                let score: number = (percentage * maxMoney) / hackTime;
+                // check if score is highest yet
+                if (score > highestScore) {
+                    // set highest score and target name to new server
+                    highestScore = score;
                     targetName = server;
                 }
             }
