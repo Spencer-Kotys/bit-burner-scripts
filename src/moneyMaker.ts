@@ -114,5 +114,7 @@ export async function main(ns: NS): Promise<void> {
         }
         // check if there are new servers
         internet = checkInternet(ns, internet);
+        // sleep 10 seconds
+        await ns.sleep(10000);
     }
  }
