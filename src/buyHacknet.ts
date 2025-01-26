@@ -41,4 +41,6 @@ export async function main(ns: NS): Promise<void> {
         // sleep for 10 seconds
         await ns.sleep(10000);
     }
+    // complete msg
+    ns.tprint("Completed Hacknet Node Purchase");
 }
