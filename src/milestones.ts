@@ -5,14 +5,14 @@ export async function main(ns: NS): Promise<void> {
     ns.print("Starting milestones script");
     // gain root access on CSEC (we will wait for our hack script to do this)
     while (!ns.hasRootAccess("CSEC")) {
-        ns.sleep(10000);
+        await ns.sleep(10000);
     }
     // log that we have root access on CSEC
     ns.print("Root access on CSEC acquired");
     // install backdoor on CSEC
     // wait until we have the hacking level required to install the backdoor
     while (ns.getServerRequiredHackingLevel("CSEC") > ns.getHackingLevel()) {
-        ns.sleep(10000);
+        await ns.sleep(10000);
     }
     // join CyberSec
 

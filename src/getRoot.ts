@@ -93,7 +93,7 @@ export async function main(ns: NS): Promise<void> {
     }
     // wait for "BruteSSH to exist
     while (!(ns.fileExists("BruteSSH.exe", "home"))) {
-        ns.sleep(10000);
+        await ns.sleep(10000);
     }
     // go through 1 port list
     for (let i = 0; i< port1.length; ++i) {
@@ -102,7 +102,7 @@ export async function main(ns: NS): Promise<void> {
     }
     // wait for FTPcrack to exist
     while (!(ns.fileExists("FTPcrack.exe", "home"))) {
-        ns.sleep(10000);
+        await ns.sleep(10000);
     }
     for (let i = 0; i < port2.length; ++i) {
         ns.ftpcrack(port2[i]);
@@ -111,7 +111,7 @@ export async function main(ns: NS): Promise<void> {
     }
     // wait for RelaySMTP to exist
     while (!(ns.fileExists("RelaySMTP.exe", "home"))) {
-        ns.sleep(10000);
+        await ns.sleep(10000);
     }
     for (let i = 0; i < port3.length; ++i) {
         ns.relaysmtp(port3[i]);
@@ -121,7 +121,7 @@ export async function main(ns: NS): Promise<void> {
     }
     // wait for HTTPWorm to exist
     while (!(ns.fileExists("HTTPWorm.exe", "home"))) {
-        ns.sleep(10000);
+        await ns.sleep(10000);
     }
     for (let i = 0; i < port4.length; ++i) {
         ns.httpworm(port4[i]);
@@ -132,7 +132,7 @@ export async function main(ns: NS): Promise<void> {
     }
     // wait for SQLInject to exist
     while (!(ns.fileExists("SQLInject.exe", "home"))) {
-        ns.sleep(10000);
+        await ns.sleep(10000);
     }
     for (let i = 0; i < port5.length; ++i) {
         ns.sqlinject(port5[i]);
