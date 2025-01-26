@@ -13,8 +13,8 @@ export async function main(ns: NS): Promise<void> {
             if (shares > 0) {
                 // get forecast
                 const forecast: number = ns.stock.getForecast(symbol);
-                // if forecast is less than 0
-                if (forecast < 0) {
+                // if forecast is less than 0.6
+                if (forecast < 0.6) {
                     // sell shares
                     ns.stock.sellStock(symbol, shares);
                     // get gain
