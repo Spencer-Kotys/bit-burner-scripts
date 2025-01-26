@@ -9,26 +9,29 @@ function getTarget(ns: NS, internet: string[]): string {
         const server = internet[i];
         // check if server is not home server
         if (server != "home") {
-            // check if server has money
-            if (ns.getServerMoneyAvailable(server) > 1000) {
-                // check if server is hackable
-                if (ns.getServerRequiredHackingLevel(server) <= ns.getHackingLevel()) {
-                    // get percentage of money that is hacked with one thread
-                    let percentage: number = ns.hackAnalyze(server);
-                    // get max amount of money on server
-                    let maxMoney: number = ns.getServerMaxMoney(server);
-                    // get time to hack server
-                    let hackTime: number = ns.getHackTime(server);
-                    // calculate score
-                    let score: number = (percentage * maxMoney) / hackTime;
-                    // check if score is highest yet
-                    if (score > highestScore) {
-                        // set highest score and target name to new server
-                        highestScore = score;
-                        targetName = server;
-                    }
-                }    
-            }
+            // check if we have root access
+            if (ns.hasRootAccess(server)){
+                // check if server has money
+                if (ns.getServerMoneyAvailable(server) > 1000) {
+                    // check if server is hackable
+                    if (ns.getServerRequiredHackingLevel(server) <= ns.getHackingLevel()) {
+                        // get percentage of money that is hacked with one thread
+                        let percentage: number = ns.hackAnalyze(server);
+                        // get max amount of money on server
+                        let maxMoney: number = ns.getServerMaxMoney(server);
+                        // get time to hack server
+                        let hackTime: number = ns.getHackTime(server);
+                        // calculate score
+                        let score: number = (percentage * maxMoney) / hackTime;
+                        // check if score is highest yet
+                        if (score > highestScore) {
+                            // set highest score and target name to new server
+                            highestScore = score;
+                            targetName = server;
+                        }
+                    }    
+                }
+            }    
         }
     }
     return targetName;
