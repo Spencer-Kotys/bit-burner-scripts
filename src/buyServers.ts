@@ -1,8 +1,8 @@
 import { NS } from "@ns";
 
 export async function main(ns: NS): Promise<void> {
-    // How much RAM each purchased server will have. In this case, it'll be 16GB.
-    const ram = 16;
+    // How much RAM each purchased server will have. In this case, it'll be 32GB.
+    const ram = 32;
     // Iterator we'll use for our loop
     let i = 0;
     // Continuously try to purchase servers until we've reached the maximum
@@ -30,4 +30,7 @@ export async function main(ns: NS): Promise<void> {
         //Removing this line will cause an infinite loop and crash the game.
         await ns.sleep(10000);
     }
+    // If we reach this point, then we've reached the maximum amount of servers
+    ns.tprint("Max servers purchased.");
+    return
 }
