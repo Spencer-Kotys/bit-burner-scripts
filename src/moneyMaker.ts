@@ -50,7 +50,11 @@ function getNumOfThreads(ns: NS, server: string, scriptRam: number) {
     // get amount of RAM on server
     const serverRam: number = ns.getServerMaxRam(server);
     // get current RAM used
-    const usedRam: number = ns.getServerUsedRam(server);
+    let usedRam: number = ns.getServerUsedRam(server);
+    // if home server, add 10 GB to used RAM, this will save RAM for other scripts
+    if (server === "home") {
+        usedRam += 10;
+    }
     // calculate number of threads to run based on Ram, round down to nearest whole number
     const threads: number = Math.floor((serverRam - usedRam) / scriptRam);
     // return number of threads
