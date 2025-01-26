@@ -65,6 +65,9 @@ function getNumOfThreads(ns: NS, server: string, scriptRam: number) {
   }
 
 export async function main(ns: NS): Promise<void> {
+    // disable logs for Ram
+    ns.disableLog("getServerMaxRam");
+    ns.disableLog("getServerUsedRam");
     // declare internet as array of strings
     let internet: string[] = ns.args as string[];
     // get script Ram requirements
