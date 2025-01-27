@@ -13,6 +13,7 @@ export async function main(ns: NS): Promise<void> {
             if (shares > 0) {
                 // get forecast
                 const forecast: number = ns.stock.getForecast(symbol);
+                //ns.tprint(`Forecast for ${symbol}: ${forecast}`);
                 // if forecast is less than 0.6
                 if (forecast < 0.6) {
                     // sell shares
@@ -21,15 +22,11 @@ export async function main(ns: NS): Promise<void> {
                     const gain: number = ns.stock.getSaleGain(symbol, shares, "long");
                     ns.tprint(`Sold ${shares} shares of ${symbol} for a gain of ${gain}`);
                 }
-                // get price of stock
-                const price: number = ns.stock.getBidPrice(symbol);
-                // sell shares
-                ns.stock.sellStock(symbol, shares);
-                ns.tprint(`Sold ${shares} shares of ${symbol} at ${price}`);
             }
         }
         // get current funds minus 1 million
-        let currentFunds: number = (ns.getServerMoneyAvailable('home')-1000000);
+        //let currentFunds: number = (ns.getServerMoneyAvailable('home')-1000000);
+        let currentFunds: number = 1000000;
         // declare stock to buy
         let stockToBuy: string = "";
         // declare best forecast
@@ -44,6 +41,7 @@ export async function main(ns: NS): Promise<void> {
                 stockToBuy = symbol;
                 // set best forecast
                 bestForecast = forecast;
+                //ns.tprint(`Best forecast is ${bestForecast} for ${stockToBuy}`);
             }  
         }
         // get price of stock to buy
