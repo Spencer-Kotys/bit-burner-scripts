@@ -1,8 +1,8 @@
 import { NS } from "@ns";
 
 function findBestTarget(ns: NS, internet: string[]): string {
-    // create base variables
-    let targetName = "";
+    // initialize target name and highest score, set targetName to n00dles as default
+    let targetName = "n00dles";
     let highestScore: number = 0;
     // loop through internet array
     for (const server of internet) {
