@@ -76,7 +76,10 @@ export async function main(ns: NS): Promise<void> {
                 let numOfThreads: number = getNumOfThreads(ns, server, weakenRam);
                 // execute payload on server with number of threads
                 if (numOfThreads > 0) {
-                    ns.exec("w.js",server,numOfThreads,target);
+                    let error: number = ns.exec("w.js",server,numOfThreads,target);
+                    if (error === 0) {
+                        ns.tprint("Error: Weaken failed on " + server);
+                    }
                 }
             }
         }
@@ -86,7 +89,10 @@ export async function main(ns: NS): Promise<void> {
                 let numOfThreads: number = getNumOfThreads(ns, server, growRam);
                 // execute payload on server with number of threads
                 if (numOfThreads > 0) {
-                    ns.exec("g.js",server,numOfThreads,target);
+                    let error: number = ns.exec("g.js",server,numOfThreads,target);
+                    if (error === 0) {
+                        ns.tprint("Error: Grow failed on " + server);
+                    }
                 }
             }
         }
@@ -98,7 +104,10 @@ export async function main(ns: NS): Promise<void> {
                 let numOfThreads: number = getNumOfThreads(ns, server, hackRam);
                 // execute payload on server with number of threads
                 if (numOfThreads > 0) {
-                    ns.exec("h.js",server,numOfThreads,target);
+                    let error: number = ns.exec("h.js",server,numOfThreads,target);
+                    if (error === 0) {
+                        ns.tprint("Error: Hack failed on " + server);
+                    }
                 }
             }
         }
