@@ -52,7 +52,12 @@ export async function main(ns: NS): Promise<void> {
         // get the current shares of the stock we have
         let currentShares: number = ns.stock.getPosition(stockToBuy)[0];
         // get the number of shares we can buy
-        let sharesToBuy: number = Math.min(Math.floor(currentFunds / price), maxShares - currentShares);
+        // Calculate the number of shares we can afford to buy with the current funds
+        const affordableShares: number = Math.floor(currentFunds / price);
+        // Calculate the maximum number of shares we can buy without exceeding the max shares limit
+        const maxPurchasableShares: number = maxShares - currentShares;
+        // Determine the number of shares to buy, which is the minimum of the affordable shares and the max purchasable shares
+        let sharesToBuy: number = Math.min(affordableShares, maxPurchasableShares);
         // check if we can buy shares
         if (sharesToBuy > 0) {
             // buy shares
