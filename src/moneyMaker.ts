@@ -31,7 +31,7 @@ function checkInternet(ns: NS, internet: string[]): string[] {
     // peek port 1
     let port1: string[] = ns.peek(1);
     // if internet is not the same as port 1 and is not null
-    if (internet != port1 && (!(port1.includes("NULL PORT DATA")))) {
+    if (JSON.stringify(internet) !== JSON.stringify(port1) && (!(port1.includes("NULL PORT DATA")))) {
         // set internet to port 1
         internet = port1;
     }
@@ -39,7 +39,7 @@ function checkInternet(ns: NS, internet: string[]): string[] {
 }
 
 // calculate number of threads to run on server
-function getNumOfThreads(ns: NS, server: string, scriptRam: number) {
+function getNumOfThreads(ns: NS, server: string, scriptRam: number): number {
     // get amount of RAM on server
     const serverRam: number = ns.getServerMaxRam(server);
     // get current RAM used
@@ -59,7 +59,7 @@ export async function main(ns: NS): Promise<void> {
     ns.disableLog("getServerMaxRam");
     ns.disableLog("getServerUsedRam");
     // declare internet as array of strings
-    let internet: string[] = ns.args as string[];
+    let internet: string[] = ns.args.filter(arg => typeof arg === 'string') as string[];
     // get script Ram requirements
     const weakenRam: number = ns.getScriptRam("w.js", "home");
     const growRam: number = ns.getScriptRam("g.js", "home");
@@ -72,7 +72,6 @@ export async function main(ns: NS): Promise<void> {
         if (ns.getServerSecurityLevel(target) > ns.getServerMinSecurityLevel(target)) {
             // weaken it
             for (const server of internet) {
-                let server: string = server;
                 // get number of threads to run
                 let numOfThreads: number = getNumOfThreads(ns, server, weakenRam);
                 // execute payload on server with number of threads
@@ -83,9 +82,7 @@ export async function main(ns: NS): Promise<void> {
         }
         else if (ns.getServerMoneyAvailable(target) < ns.getServerMaxMoney(target)) {
             // grow it
-            for (let i = 0; i< internet.length; ++i) {
-                let server: string = internet[i];
-                // get number of threads to run
+            for (const server of internet) {
                 let numOfThreads: number = getNumOfThreads(ns, server, growRam);
                 // execute payload on server with number of threads
                 if (numOfThreads > 0) {
