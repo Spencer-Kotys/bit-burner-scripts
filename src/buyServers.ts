@@ -1,8 +1,8 @@
 import { NS } from "@ns";
 
 export async function main(ns: NS): Promise<void> {
-    // How much RAM each purchased server will have. In this case, it'll be 32GB.
-    const ram = 32;
+    // How much RAM each purchased server will have. We will buy the max amount.
+    const ram = 1048576;
     // Iterator we'll use for our loop
     let i = 0;
     // Continuously try to purchase servers until we've reached the maximum
